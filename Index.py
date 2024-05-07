@@ -28,7 +28,7 @@ def dublicate_low(sorted_numbers, index):
             break
         elif small[m] == small[m-1]:
             m = m-1
-    return index+m+1
+    return index + m + 1
 
 
 def dublicate_up(sorted_numbers, index):
