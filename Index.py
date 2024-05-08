@@ -3,54 +3,90 @@ import sys
 
 def find_element(sorted_numbers, element):
     left = 0
-    right = len(sorted_numbers)-1
+    right = len(sorted_numbers) - 1
+    result_position = - 1
+
     while left <= right:
-        mid = (left + right)//2
+        mid = (left + right) // 2
+
         if sorted_numbers[mid] == element:
-            a = dublicate_low(sorted_numbers, mid)
-            return print(a)
-        if sorted_numbers[mid] < element:
-            left = mid + 1
-        if sorted_numbers[mid] > element:
+            result_position = mid
             right = mid - 1
-    return print(new(sorted_numbers, mid, element))
-
-
-def dublicate_low(sorted_numbers, index):
-    if index == 0:
-        return index
-    small = (sorted_numbers[0:index+1])
-    a = len(small)
-    m = -1
-    while a > 1:
-        a -= 1
-        if small[m] > small[m-1]:
-            break
-        elif small[m] == small[m-1]:
-            m = m-1
-    return index + m + 1
-
-
-def dublicate_up(sorted_numbers, index):
-    small = (sorted_numbers[index:])
-    count = 0
-    for i in range(len(small)-1):
-        if small[i] < small[i+1]:
-            break
-        elif small[i] == small[i+1]:
-            count += 1
-    return index+count
-
-
-def new(current_list, mid, element):
-    a = dublicate_low(current_list, mid)
-    b = dublicate_up(current_list, mid)
-    if element < current_list[a]:
-        return a
-    elif element > current_list[b]:
-        return b + 1
+        elif sorted_numbers[mid] < element:
+            left = mid + 1
+        else:
+            right = mid - 1
+    if result_position != -1:
+        return print(result_position)
     else:
-        return a + 1
+        return print(new(sorted_numbers, element))
+
+
+def new(sorted_numbers, element):
+    left = 0
+    right = len(sorted_numbers)-1
+    result_position = - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if element < sorted_numbers[mid]:
+            result_position = mid
+            right = mid - 1
+        else:
+            result_position = mid + 1
+            left = mid + 1
+    return result_position
+
+
+# def find_element(sorted_numbers, element):
+#     left = 0
+#     right = len(sorted_numbers)-1
+#     while left <= right:
+#         mid = (left + right)//2
+#         if sorted_numbers[mid] == element:
+#             a = dublicate_low(sorted_numbers, mid)
+#             return print(a)
+#         elif sorted_numbers[mid] < element:
+#             left = mid + 1
+#         else:
+#             right = mid - 1
+#     return print(new(sorted_numbers, mid, element))
+
+
+# def dublicate_low(sorted_numbers, index):
+#     if index == 0:
+#         return index
+#     small = (sorted_numbers[0:index+1])
+#     a = len(small)
+#     m = -1
+#     while a > 1:
+#         a -= 1
+#         if small[m] > small[m-1]:
+#             break
+#         elif small[m] == small[m-1]:
+#             m = m-1
+#     return index + m + 1
+
+
+# def dublicate_up(sorted_numbers, index):
+#     small = (sorted_numbers[index:])
+#     count = 0
+#     for i in range(len(small)-1):
+#         if small[i] < small[i+1]:
+#             break
+#         elif small[i] == small[i+1]:
+#             count += 1
+#     return index+count
+
+
+# def new(current_list, mid, element):
+#     a = dublicate_low(current_list, mid)
+#     b = dublicate_up(current_list, mid)
+#     if element < current_list[a]:
+#         return a
+#     elif element > current_list[b]:
+#         return b + 1
+#     else:
+#         return a + 1
 
 
 def main():
